@@ -106,7 +106,7 @@ Instead, it is following a geodesic of the Schwarzschild metric.
 
 The resulting path appears to an outside observer as a gravitational orbit.
 
-![Orbital Motion Animation](orbit_animation.webp)
+![Orbital Motion Animation](orbit_demo.webp)
 
 ---
 
