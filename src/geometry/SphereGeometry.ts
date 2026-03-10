@@ -11,7 +11,7 @@ export class SphereGeometry implements Geometry {
         ]
     }
 
-    inverseMetric(x: number[]): number[][] {
+    analyticInverseMetric(x: number[]): number[][] {
         const theta = x[0]
         const sinThetaSq = Math.pow(Math.sin(theta), 2)
         // Avoid division by zero at the poles
@@ -23,7 +23,7 @@ export class SphereGeometry implements Geometry {
         ]
     }
 
-    christoffel(x: number[]): number[][][] {
+    analyticChristoffel(x: number[]): number[][][] {
         const theta = x[0]
         const sinTheta = Math.sin(theta)
         const cosTheta = Math.cos(theta)

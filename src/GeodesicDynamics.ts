@@ -1,5 +1,6 @@
 import type { State } from './State'
 import type { Geometry } from './Geometry'
+import { MetricConnectionBuilder } from './geometry/MetricConnectionBuilder'
 
 export interface StateDerivative {
     dx: number[]
@@ -21,7 +22,9 @@ export class GeodesicDynamics implements Dynamics {
     derivative(state: State): StateDerivative {
         const { x, v } = state
         const dim = this.geometry.dimension
-        const christoffel = this.geometry.christoffel(x)
+        const christoffel = this.geometry.christoffel
+            ? this.geometry.christoffel(x)
+            : MetricConnectionBuilder.computeChristoffel(this.geometry, x)
 
         const dv = new Array(dim).fill(0)
 

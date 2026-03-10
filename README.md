@@ -20,7 +20,7 @@ Where:
 - $v^\mu = \frac{dx^\mu}{d\lambda}$ is the velocity vector.
 - $\Gamma^\mu_{\alpha\beta}$ are the **Christoffel Symbols of the Second Kind**, which mathematically encode the curvature of the manifold.
 
-The engine calculates the $\Gamma$ terms provided by a given `Geometry` class, and feeds the resulting acceleration $\frac{dv^\mu}{d\lambda}$ to a numerical integrator (like standard Runge-Kutta 4) to step the state $[x, v]$ forward in time.
+The engine natively integrates the $\Gamma$ terms. It provides a `MetricConnectionBuilder` that accepts a given `Geometry` mathematically defined only by a metric tensor $g_{\mu\nu}$, automatically computes the inverse metric and partial derivatives using finite differences, and derives the Levi-Civita Connection $\Gamma^\mu_{\alpha\beta}$. The resulting acceleration $\frac{dv^\mu}{d\lambda}$ is fed to a numerical integrator (like standard Runge-Kutta 4) to step the state $[x, v]$ forward in time.
 
 If tracking Relativistic Proper Time ($\tau$), the engine also simultaneously integrates the proper time accumulation rate defined by the metric tensor $g_{\mu\nu}$:
 $$ d\tau = \sqrt{-g_{\mu\nu} v^\mu v^\nu} \ d\lambda $$

@@ -10,6 +10,7 @@ export class Minkowski1DGeometry implements Geometry {
         ]
     }
 
+    /*
     inverseMetric(_x: number[]): number[][] {
         return [
             [-1, 0],
@@ -30,4 +31,5 @@ export class Minkowski1DGeometry implements Geometry {
             ]
         ]
     }
+    */
 }

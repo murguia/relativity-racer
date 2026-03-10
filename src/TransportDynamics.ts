@@ -1,6 +1,7 @@
 import type { State } from './State'
 import type { Geometry } from './Geometry'
 import type { Dynamics, StateDerivative } from './GeodesicDynamics'
+import { MetricConnectionBuilder } from './geometry/MetricConnectionBuilder'
 
 export interface TransportStateDerivative extends StateDerivative {
     dCarriedVectors: number[][]
@@ -16,7 +17,9 @@ export class TransportDynamics implements Dynamics {
     derivative(state: State): TransportStateDerivative {
         const { x, v, carriedVectors } = state
         const dim = this.geometry.dimension
-        const christoffel = this.geometry.christoffel(x)
+        const christoffel = this.geometry.christoffel
+            ? this.geometry.christoffel(x)
+            : MetricConnectionBuilder.computeChristoffel(this.geometry, x)
 
         const dv = new Array(dim).fill(0)
         for (let i = 0; i < dim; i++) {
