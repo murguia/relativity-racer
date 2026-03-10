@@ -70,6 +70,33 @@ This clean separation is why the same $RK4$ integration code powers both a 3D sp
 
 ---
 
+## 4. Why This Engine Is Different
+
+Most game engines simulate motion by applying forces in a fixed Euclidean space.
+
+This engine instead simulates motion as geodesics on a manifold.
+
+That means:
+
+    Geometry → determines motion.
+
+The physics core does not know anything about gravity, spheres, or black holes.
+
+It only integrates the geodesic equation using the metric tensor provided by the selected manifold.
+
+By swapping the Geometry implementation, the same engine can simulate:
+
+- straight lines on a plane
+- great-circle navigation on a sphere
+- relativistic time dilation in Minkowski spacetime
+- orbital motion in curved Schwarzschild spacetime
+
+In other words:
+
+    the geometry of spacetime itself becomes the "physics engine".
+
+---
+
 ## Running the Project
 
 ```bash
