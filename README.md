@@ -29,6 +29,7 @@ If tracking Relativistic Proper Time ($\tau$), the engine also simultaneously in
 $$
 d\tau = \sqrt{-g_{\mu\nu} v^\mu v^\nu} \, d\lambda
 $$
+
 ---
 
 ## 2. Manifolds & Metrics Modeled
