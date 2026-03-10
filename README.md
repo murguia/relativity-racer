@@ -54,7 +54,7 @@ The engine's physics are completely decoupled from any specific geometry. We cur
 
 ## 3. Architecture: Separation of Engine and Rendering
 
-A critical architectural constraint of the Geodesic Engine is that **physics and rendering are strictly separated**.
+A critical architectural constraint of the Geodesic Engine is that **physics and rendering are strictly separated**, and **simulations are encapsulated**.
 
 1. **The Core Physics (`Integrator`, `Dynamics`, `Geometry`):**
    - The engine operates entirely in **Intrinsic Coordinates**. It has no concept of "screens", "pixels", or "3D rendering".
@@ -64,7 +64,11 @@ A critical architectural constraint of the Geodesic Engine is that **physics and
 2. **The Renderers (`CanvasRenderer`, `SpacetimeRenderer`, `SchwarzschildRenderer`):**
    - Renderers map the engine's abstracted intrinsic numbers onto human-readable visual spaces.
    - For example, the `CanvasRenderer` knows how to map intrinsic $[\theta, \phi]$ angles to an external Cartesian $[X, Y, Z]$ space to draw a 3D wireframe globe on the $2D$ screen.
-   - The `SchwarzschildRenderer` knows how to map intrinsic polar coordinates $[r, \phi]$ into an overhead map, drawing the event horizon at $r=2M$.
+
+3. **The Simulation Lab Registry (`SimulationModule`):**
+   - The UI orchestrates a "Simulation Lab", a museum gallery of relativistic experiments.
+   - Hardcoded UI logic is entirely abstracted away. A new simulation easily snaps into the `SimulationRegistry` array by implementing the generic `SimulationModule` interface.
+   - The main application simply iterates over the Active Module, dynamically rendering its custom control panel, initializing its state, and feeding its custom update and render events into the global `requestAnimationFrame` physical `tick()` loop.
 
 This clean separation is why the same $RK4$ integration code powers both a 3D sphere simulation and a Black Hole orbital simulator without a single conceptual change to the mathematics!
 
@@ -117,7 +121,7 @@ npm install
 npm run dev
 ```
 
-The Vite server will start precisely at `http://localhost:5173`. Use the dropdown in the UI to jump between the various topological and relativistic manifolds!
+The Vite server will start precisely at `http://localhost:5173`. Use the dynamic sidebar on the left side of the screen to jump into the various topological and relativistic test chambers!
 
 ---
 
