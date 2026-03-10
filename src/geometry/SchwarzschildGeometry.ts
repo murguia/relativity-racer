@@ -26,6 +26,20 @@ export class SchwarzschildGeometry implements Geometry {
         ]
     }
 
+    inverseMetric(x: number[]): number[][] {
+        const r = x[1]
+        const rs = 2 * this.mass
+        const safeR = Math.max(r, rs + 1e-6)
+
+        const f = 1 - rs / safeR
+
+        return [
+            [-1 / f, 0, 0],
+            [0, f, 0],
+            [0, 0, 1 / (safeR * safeR)]
+        ]
+    }
+
     christoffel(x: number[]): number[][][] {
         const r = x[1]
         const M = this.mass

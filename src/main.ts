@@ -13,8 +13,13 @@ import { RelativisticDynamics } from './RelativisticDynamics'
 
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
   <div style="display: flex; gap: 20px; padding: 20px; font-family: sans-serif; color: white;">
-    <div>
+    <div style="max-width: 800px;">
       <canvas id="simCanvas" width="800" height="600" style="border: 1px solid #444; background: #1e1e1e;"></canvas>
+      
+      <div style="margin-top: 20px; font-size: 14px; color: #ddd; background: #222; padding: 15px; border-radius: 6px; line-height: 1.5; border-left: 4px solid #00ffcc;">
+        <strong style="color: #fff; font-size: 16px;">What is this?</strong><br>
+        The Geodesic Engine simulates physics using relativity rather than Newtonian "forces". By programming in a metric (the shape of spacetime), the engine calculates geodesic paths—objects trying to travel in "straight lines" through curved reality. This naturally produces effects like orbital mechanics, gravitational slingshots, and time dilation without explicitly coding them!
+      </div>
     </div>
     <div style="display: flex; flex-direction: column; gap: 10px; width: 350px; max-height: 800px; overflow-y: auto;">
       <h2>Relativity Racer</h2>

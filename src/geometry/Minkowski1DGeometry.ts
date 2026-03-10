@@ -10,6 +10,13 @@ export class Minkowski1DGeometry implements Geometry {
         ]
     }
 
+    inverseMetric(x: number[]): number[][] {
+        return [
+            [-1, 0],
+            [0, 1]
+        ]
+    }
+
     christoffel(x: number[]): number[][][] {
         // Flat spacetime, all Christoffel symbols are zero
         return [
