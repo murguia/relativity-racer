@@ -118,3 +118,15 @@ npm run dev
 ```
 
 The Vite server will start precisely at `http://localhost:5173`. Use the dropdown in the UI to jump between the various topological and relativistic manifolds!
+
+---
+
+## Future Extensions
+
+Planned extensions include:
+
+- photon geodesics (null trajectories)
+- gravitational lensing visualization
+- relativistic cockpit rendering
+- multi-ship worldline simulations
+- proper-time racing mechanics
