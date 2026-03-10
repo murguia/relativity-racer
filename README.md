@@ -48,7 +48,7 @@ The engine's physics are completely decoupled from any specific geometry. We cur
 - **Schwarzschild Curved Spacetime ($t, r, \phi$):**
   - *Metric:* The non-rotating Black Hole metric. $g_{tt} = -(1 - \frac{2M}{r})$, $g_{rr} = (1 - \frac{2M}{r})^{-1}$, $g_{\phi\phi} = r^2$.
   - *Christoffel:* Highly non-linear gravitational source terms.
-  - *Result:* General Relativity. Particles fall into the central mass $M$. Entering with perpendicular velocity creates stable orbits. Proper time $\tau$ explicitly ticks slower deep in the gravity well due to $g_{tt} < -1$.
+  - *Result:* General Relativity. Particles fall into the central mass $M$. Entering with perpendicular velocity creates stable orbits. Proper time slows as $r \to 2M$ due to the redshift factor $(1 - \frac{2M}{r})$.
 
 ---
 
