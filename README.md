@@ -12,7 +12,9 @@ By simply changing the mathematical definition of spacetime (the **Metric**), th
 
 The core of the simulation relies on numerically integrating the **Geodesic Equation**:
 
-$$ \frac{d^2x^\mu}{d\lambda^2} = -\Gamma^\mu_{\alpha\beta} \frac{dx^\alpha}{d\lambda} \frac{dx^\beta}{d\lambda} $$
+$$
+\frac{d^2x^\mu}{d\lambda^2} = -\Gamma^\mu_{\alpha\beta} \frac{dx^\alpha}{d\lambda} \frac{dx^\beta}{d\lambda}
+$$
 
 Where:
 - $x^\mu$ are the generalized intrinsic coordinates (e.g., $r, \theta, \phi, t$).
@@ -23,8 +25,10 @@ Where:
 The engine natively integrates the $\Gamma$ terms. It provides a `MetricConnectionBuilder` that accepts a given `Geometry` mathematically defined only by a metric tensor $g_{\mu\nu}$, automatically computes the inverse metric and partial derivatives using finite differences, and derives the Levi-Civita Connection $\Gamma^\mu_{\alpha\beta}$. The resulting acceleration $\frac{dv^\mu}{d\lambda}$ is fed to a numerical integrator (like standard Runge-Kutta 4) to step the state $[x, v]$ forward in time.
 
 If tracking Relativistic Proper Time ($\tau$), the engine also simultaneously integrates the proper time accumulation rate defined by the metric tensor $g_{\mu\nu}$:
-$$ d\tau = \sqrt{-g_{\mu\nu} v^\mu v^\nu} \ d\lambda $$
 
+$$
+d\tau = \sqrt{-g_{\mu\nu} v^\mu v^\nu} \, d\lambda
+$$
 ---
 
 ## 2. Manifolds & Metrics Modeled
