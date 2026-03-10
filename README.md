@@ -17,7 +17,7 @@ $$ \frac{d^2x^\mu}{d\lambda^2} = -\Gamma^\mu_{\alpha\beta} \frac{dx^\alpha}{d\la
 Where:
 - $x^\mu$ are the generalized intrinsic coordinates (e.g., $r, \theta, \phi, t$).
 - $\lambda$ is an affine parameter along the curve (often coordinate time $t$ for spatial geodesics, or proper time $\tau$ for relativistic ones).
-- $\frac{dx^\mu}{d\lambda}$ is the velocity vector $v^\mu$.
+- $v^\mu = \frac{dx^\mu}{d\lambda}$ is the velocity vector.
 - $\Gamma^\mu_{\alpha\beta}$ are the **Christoffel Symbols of the Second Kind**, which mathematically encode the curvature of the manifold.
 
 The engine calculates the $\Gamma$ terms provided by a given `Geometry` class, and feeds the resulting acceleration $\frac{dv^\mu}{d\lambda}$ to a numerical integrator (like standard Runge-Kutta 4) to step the state $[x, v]$ forward in time.
