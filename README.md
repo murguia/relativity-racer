@@ -97,6 +97,19 @@ In other words:
 
 ---
 
+## Example: Orbital Motion in Schwarzschild Spacetime
+
+Below is a particle orbiting a central mass M.
+
+The particle is not experiencing a force.
+Instead, it is following a geodesic of the Schwarzschild metric.
+
+The resulting path appears to an outside observer as a gravitational orbit.
+
+![Orbital Motion Animation](orbit_animation.webp)
+
+---
+
 ## Running the Project
 
 ```bash
