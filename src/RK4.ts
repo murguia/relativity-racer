@@ -14,6 +14,7 @@ export class RK4 implements Integrator {
         // Helper for stepping state
         const stepState = (deriv: any, factor: number) => {
             const s: State = {
+                ...state,
                 x: add(x, scale(deriv.dx, factor)),
                 v: add(v, scale(deriv.dv, factor))
             }
@@ -46,6 +47,7 @@ export class RK4 implements Integrator {
         const dv = combine(d1.dv, d2.dv, d3.dv, d4.dv)
 
         const nextState: State = {
+            ...state,
             x: add(x, scale(dx, dt)),
             v: add(v, scale(dv, dt))
         }

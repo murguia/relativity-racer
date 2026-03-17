@@ -73,4 +73,21 @@ export class SchwarzschildGeometry implements Geometry {
 
         return G
     }
+
+    getThrustVector(x: number[], thrust: number, orientation: number): number[] {
+        const r = x[1]
+        
+        // Map 2D orientation (heading angle) and thrust magnitude (a) 
+        // into proper acceleration Components [a^t, a^r, a^phi]
+        // Thrust acts solely on the spatial components initially for a pilot
+        const a_t = 0
+        const a_r = thrust * Math.cos(orientation)
+        
+        // Note: linear acceleration tangentially must be divided by r to 
+        // become an angular acceleration a^phi
+        const safeR = Math.max(r, 1e-6)
+        const a_phi = (thrust * Math.sin(orientation)) / safeR
+
+        return [a_t, a_r, a_phi]
+    }
 }

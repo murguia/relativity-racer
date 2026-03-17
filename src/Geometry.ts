@@ -3,4 +3,5 @@ export interface Geometry {
     metric(x: number[]): number[][]
     inverseMetric?(x: number[]): number[][]
     christoffel?(x: number[]): number[][][]
+    getThrustVector?(x: number[], thrust: number, orientation: number): number[]
 }

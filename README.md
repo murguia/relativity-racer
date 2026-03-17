@@ -130,6 +130,19 @@ The Vite server will start precisely at `http://localhost:5173`. Use the dynamic
 
 ---
 
+## Project Milestones Completed
+
+- **Milestone 0: Geodesic Engine Foundation** - Core math primitives, physics dynamics, integrator logic, and 2D rendering setup.
+- **Milestone 1: Geodesics on a Sphere** - Introduced `SphereGeometry` and proved the engine can natively orbit particles on a 2D surface manifold.
+- **Milestone 2: Parallel Transport and Holonomy** - Handled transporting geometry-bound vectors along curves, demonstrating spherical holonomy.
+- **Milestone 3: Relativistic Spacetime and Proper Time** - Modeled 1+1D Minkowski Spacetime, calculating Time Dilation invariant $\tau$.
+- **Milestone 4: Curved Spacetime and Gravitational Geodesics** - Implemented the Schwarzschild metric, calculating gravitational pull and stable orbits entirely via spacetime curvature.
+- **Milestone 5: UI Evolution - Simulation Lab Interface** - Abstracted the app into a sleek UI hosting numerous decoupled `SimulationModule` scenarios.
+- **Milestone 6: Metric-Driven Geometry (Automatic Connection)** - Shifted to fully numeric Christoffel symbol derivation; new geometries only need to define $g_{\mu\nu}$.
+- **Milestone 7: Navigable Worldlines (Spacecraft Thrust & Steering)** - Added active player W/A/D controls mapping coordinate accelerations onto relativistic geodesic motion.
+
+---
+
 ## Future Extensions
 
 Planned extensions include:
