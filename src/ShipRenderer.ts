@@ -1,4 +1,6 @@
 import type { Ship } from './Ship'
+import type { Checkpoint } from './gameplay/Checkpoint'
+import type { GhostFrame } from './gameplay/GhostSystem'
 
 export class ShipRenderer {
     private ctx: CanvasRenderingContext2D
@@ -32,7 +34,7 @@ export class ShipRenderer {
         ]
     }
 
-    drawEnvironment(waypointR: number, waypointPhi: number) {
+    drawEnvironment() {
         const cx = this.width / 2
         const cy = this.height / 2
 
@@ -72,20 +74,23 @@ export class ShipRenderer {
         this.ctx.arc(cx, cy, pointOfNoReturn * this.scale * 0.95, 0, Math.PI * 2)
         this.ctx.fill()
         this.ctx.shadowBlur = 0 // reset
+    }
 
-        // Draw Waypoint
-        const [wx, wy] = this.toScreen(waypointR, waypointPhi)
-        this.ctx.fillStyle = '#00ff00'
-        this.ctx.shadowBlur = 10
-        this.ctx.shadowColor = '#00ff00'
+    drawCheckpoint(c: Checkpoint, isNextTarget: boolean) {
+        const [px, py] = this.toScreen(c.position[0], c.position[1])
+        
+        this.ctx.fillStyle = isNextTarget ? '#00ff00' : '#444444'
+        this.ctx.shadowBlur = isNextTarget ? 10 : 0
+        this.ctx.shadowColor = isNextTarget ? '#00ff00' : 'transparent'
+        
         this.ctx.beginPath()
-        this.ctx.arc(wx, wy, 5, 0, Math.PI * 2)
+        this.ctx.arc(px, py, 5, 0, Math.PI * 2)
         this.ctx.fill()
 
         this.ctx.strokeStyle = '#ffffff'
         this.ctx.lineWidth = 1
         this.ctx.beginPath()
-        this.ctx.arc(wx, wy, 8, 0, Math.PI * 2)
+        this.ctx.arc(px, py, c.radius * this.scale, 0, Math.PI * 2)
         this.ctx.stroke()
         this.ctx.shadowBlur = 0
     }
@@ -140,6 +145,27 @@ export class ShipRenderer {
             this.ctx.fill()
         }
 
+        this.ctx.restore()
+    }
+
+    drawGhost(ghost: GhostFrame, color: string = '#8888ff') {
+        const r = ghost.x[1]
+        const phi = ghost.x[2]
+        const [px, py] = this.toScreen(r, phi)
+        
+        const size = 8
+        this.ctx.save()
+        this.ctx.globalAlpha = 0.5 // semi-transparent
+        this.ctx.translate(px, py)
+        this.ctx.rotate(-ghost.orientation) 
+
+        this.ctx.fillStyle = color
+        this.ctx.beginPath()
+        this.ctx.moveTo(size, 0)
+        this.ctx.lineTo(-size, size / 1.5)
+        this.ctx.lineTo(-size, -size / 1.5)
+        this.ctx.closePath()
+        this.ctx.fill()
         this.ctx.restore()
     }
 }
