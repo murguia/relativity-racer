@@ -141,6 +141,7 @@ The Vite server will start precisely at `http://localhost:5173`. Use the dynamic
 - **Milestone 6: Metric-Driven Geometry (Automatic Connection)** - Shifted to fully numeric Christoffel symbol derivation; new geometries only need to define $g_{\mu\nu}$.
 - **Milestone 7: Navigable Worldlines (Spacecraft Thrust & Steering)** - Added active player W/A/D controls mapping coordinate accelerations onto relativistic geodesic motion.
 - **Milestone 8: Missions, Checkpoints, and Ghost Racing** - Introduced structured `gameplay` logic wrapping the geometries. Implemented strictly intrinsic-coordinate sequential checkpoints, and a `GhostPlayer` that records and replays worldlines flawlessly synchronized to simulated `Coordinate Time`.
+- **Milestone 9: Photon Geodesics and Gravitational Lensing** - Embedded pure Null Geometry calculations into the engine. The system perfectly raytraces backward geodesics from a 2D spherical observer screen to a procedural infinite background, visually generating the event horizon shadow and the authentic Einstein Ring purely from mathematical spacetime curvature.
 
 ---
 
@@ -148,8 +149,6 @@ The Vite server will start precisely at `http://localhost:5173`. Use the dynamic
 
 Planned extensions include:
 
-- photon geodesics (null trajectories)
-- gravitational lensing visualization
 - relativistic cockpit rendering
 - multi-ship worldline simulations
 - proper-time racing mechanics

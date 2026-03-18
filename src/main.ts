@@ -3,7 +3,9 @@ import { Euler } from './Euler'
 import { RK4 } from './RK4'
 import type { Integrator } from './Integrator'
 import type { SimulationModule } from './simulations/SimulationModule'
-import { simulations } from './simulations/SimulationRegistry'
+import { SimulationRegistry } from './simulations/SimulationRegistry'
+
+const simulations = SimulationRegistry.getModules()
 
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
 <div style="display: flex; height: 100vh; background: #111; color: white; font-family: sans-serif; overflow: hidden;">

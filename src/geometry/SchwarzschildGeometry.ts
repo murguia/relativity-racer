@@ -26,7 +26,7 @@ export class SchwarzschildGeometry implements Geometry {
         ]
     }
 
-    analyticInverseMetric(x: number[]): number[][] {
+    inverseMetric(x: number[]): number[][] {
         const r = x[1]
         const rs = 2 * this.mass
         const safeR = Math.max(r, rs + 1e-6)
@@ -40,7 +40,7 @@ export class SchwarzschildGeometry implements Geometry {
         ]
     }
 
-    analyticChristoffel(x: number[]): number[][][] {
+    christoffel(x: number[]): number[][][] {
         const r = x[1]
         const M = this.mass
         const rs = 2 * M
