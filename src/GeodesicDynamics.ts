@@ -21,17 +21,16 @@ export class GeodesicDynamics implements Dynamics {
 
     derivative(state: State): StateDerivative {
         const { x, v } = state
-        const dim = this.geometry.dimension
         const christoffel = this.geometry.christoffel
             ? this.geometry.christoffel(x)
             : MetricConnectionBuilder.computeChristoffel(this.geometry, x)
 
-        const dv = new Array(dim).fill(0)
+        const dv = [0, 0, 0]
 
-        for (let i = 0; i < dim; i++) {
+        for (let i = 0; i < 3; i++) {
             let sum = 0
-            for (let j = 0; j < dim; j++) {
-                for (let k = 0; k < dim; k++) {
+            for (let j = 0; j < 3; j++) {
+                for (let k = 0; k < 3; k++) {
                     sum += christoffel[i][j][k] * v[j] * v[k]
                 }
             }
@@ -39,7 +38,7 @@ export class GeodesicDynamics implements Dynamics {
         }
 
         return {
-            dx: [...v],
+            dx: v,
             dv: dv
         }
     }

@@ -1,7 +1,5 @@
 import { RayTracer } from './RayTracer'
 import { SchwarzschildGeometry } from '../geometry/SchwarzschildGeometry'
-import { GeodesicDynamics } from '../GeodesicDynamics'
-import { RK4 } from '../RK4'
 
 export class LensingRenderer {
     private canvas: HTMLCanvasElement
@@ -13,7 +11,6 @@ export class LensingRenderer {
     private imageData: ImageData
 
     private rayTracer: RayTracer
-    private dynamics: GeodesicDynamics
     
     // Observer Settings
     private observerR: number = 15
@@ -34,9 +31,7 @@ export class LensingRenderer {
         this.imageData = this.ctx.createImageData(resWidth, resHeight)
         
         const geometry = new SchwarzschildGeometry(this.mass)
-        const integrator = new RK4()
-        this.rayTracer = new RayTracer(geometry, integrator, 1500)
-        this.dynamics = new GeodesicDynamics(geometry)
+        this.rayTracer = new RayTracer(geometry, 1500)
     }
 
     private needsRender: boolean = true
@@ -120,7 +115,6 @@ export class LensingRenderer {
 
                 const result = this.rayTracer.traceBackward(
                     photonState, 
-                    this.dynamics, 
                     dt, 
                     this.horizonRadius, 
                     this.maxRadius

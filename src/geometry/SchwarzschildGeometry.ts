@@ -40,6 +40,12 @@ export class SchwarzschildGeometry implements Geometry {
         ]
     }
 
+    private G: number[][][] = [
+        [[0,0,0], [0,0,0], [0,0,0]],
+        [[0,0,0], [0,0,0], [0,0,0]],
+        [[0,0,0], [0,0,0], [0,0,0]]
+    ]
+
     christoffel(x: number[]): number[][][] {
         const r = x[1]
         const M = this.mass
@@ -48,8 +54,8 @@ export class SchwarzschildGeometry implements Geometry {
 
         const f = 1 - rs / safeR
 
-        // Initialize 3x3x3 array of zeros
-        const G = Array(3).fill(0).map(() => Array(3).fill(0).map(() => Array(3).fill(0)))
+        // Reuse cached 3x3x3 array of zeros to avoid GC lag at 3 million calls/frame
+        const G = this.G
 
         // Non-zero Christoffel symbols for Schwarzschild in (t, r, phi)
         // Gamma^t_{tr} = Gamma^t_{rt} = M / (r^2 * (1 - 2M/r))

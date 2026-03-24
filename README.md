@@ -142,6 +142,8 @@ The Vite server will start precisely at `http://localhost:5173`. Use the dynamic
 - **Milestone 7: Navigable Worldlines (Spacecraft Thrust & Steering)** - Added active player W/A/D controls mapping coordinate accelerations onto relativistic geodesic motion.
 - **Milestone 8: Missions, Checkpoints, and Ghost Racing** - Introduced structured `gameplay` logic wrapping the geometries. Implemented strictly intrinsic-coordinate sequential checkpoints, and a `GhostPlayer` that records and replays worldlines flawlessly synchronized to simulated `Coordinate Time`.
 - **Milestone 9: Photon Geodesics and Gravitational Lensing** - Embedded pure Null Geometry calculations into the engine. The system perfectly raytraces backward geodesics from a 2D spherical observer screen to a procedural infinite background, visually generating the event horizon shadow and the authentic Einstein Ring purely from mathematical spacetime curvature.
+- **Milestone 10: Relativistic Cockpit View (Ship-Based Lensing)** - Implemented an interactive first-person 3D perspective from the spacecraft. Operating from the 2D physics engine, it projects dynamic relativistic distortions into a pseudo-3D celestial canvas mapped to W/A/D flight controls, heavily optimized to maintain $60$ FPS entirely synchronously without lag.
+- **Milestone 11: True Local Observer Frame (Cockpit Foundation)** - Migrated the camera logic to align with the Structure and Interpretation of Classical Mechanics (SICM) structure. Programmed a mathematically rigorous orthonormal tetrad ($\mathbf{e}_0, \mathbf{e}_1, \mathbf{e}_2$) mapped from the ship's 4-velocity using pure metric-aware Gram-Schmidt orthogonalization.
 
 ---
 
@@ -149,6 +151,6 @@ The Vite server will start precisely at `http://localhost:5173`. Use the dynamic
 
 Planned extensions include:
 
-- relativistic cockpit rendering
+- relativistic aberration and Doppler shift
 - multi-ship worldline simulations
 - proper-time racing mechanics

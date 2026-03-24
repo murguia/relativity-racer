@@ -4,6 +4,7 @@ import { SchwarzschildSimulation } from './SchwarzschildSimulation'
 import type { SimulationModule } from './SimulationModule'
 import { BlackHoleMission } from './BlackHoleMission'
 import { GravitationalLensingDemo } from './GravitationalLensingDemo'
+import { CockpitFlightDemo } from './CockpitFlightDemo'
 
 export class SimulationRegistry {
     public static getModules(): SimulationModule[] {
@@ -12,7 +13,8 @@ export class SimulationRegistry {
             new MinkowskiSimulation(),
             new SchwarzschildSimulation(),
             new BlackHoleMission(),
-            new GravitationalLensingDemo()
+            new GravitationalLensingDemo(),
+            new CockpitFlightDemo()
         ]
     }
 }
