@@ -147,6 +147,13 @@ The Vite server will start precisely at `http://localhost:5173`. Use the dynamic
 
 ---
 
+## References
+
+- [Functional Differential Geometry](https://mitpress.mit.edu/9780262052894/functional-differential-geometry/) ([pdf here](https://groups.csail.mit.edu/mac/users/gjs/6946/calculus-indexed.pdf))
+- [Structure and Interpretation of Classical Mechanics, 2nd Ed](https://mitpress.mit.edu/9780262028967/structure-and-interpretation-of-classical-mechanics/)
+
+---
+
 ## Future Extensions
 
 Planned extensions include:
