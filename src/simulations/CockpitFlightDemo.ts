@@ -29,6 +29,7 @@ export class CockpitFlightDemo implements SimulationModule {
     private externalRenderer!: ShipRenderer
     private cockpitRenderer!: CockpitRenderer
     private viewMode: 'EXTERNAL' | 'COCKPIT' = 'EXTERNAL'
+    private enableRelativisticFx: boolean = true
 
     private geometry!: SchwarzschildGeometry
     private state!: Ship
@@ -39,6 +40,7 @@ export class CockpitFlightDemo implements SimulationModule {
     // UI elements
     private modeSelect!: HTMLSelectElement
     private resSelect!: HTMLSelectElement
+    private fxCheckbox!: HTMLInputElement
 
     setup(canvas: HTMLCanvasElement): void {
         this.externalRenderer = new ShipRenderer(canvas, this.mass)
@@ -94,11 +96,18 @@ export class CockpitFlightDemo implements SimulationModule {
                     <option value="400x300">400 x 300 (Slow - HD)</option>
                 </select>
             </div>
+            <div style="margin-top: 15px;">
+                <label style="color: #ccc;">Relativistic Effects:</label><br/>
+                <label style="color: #fff; font-size: 14px; display: flex; align-items: center; gap: 8px; margin-top: 5px;">
+                    <input type="checkbox" id="relativistic-fx" checked> Enable Doppler Shift & Relativistic Effects
+                </label>
+            </div>
         `
         container.appendChild(root)
 
         this.modeSelect = root.querySelector('#cockpit-mode') as HTMLSelectElement
         this.resSelect = root.querySelector('#cockpit-res') as HTMLSelectElement
+        this.fxCheckbox = root.querySelector('#relativistic-fx') as HTMLInputElement
 
         this.modeSelect.addEventListener('change', () => {
              this.viewMode = this.modeSelect.value as 'EXTERNAL' | 'COCKPIT'
@@ -107,6 +116,10 @@ export class CockpitFlightDemo implements SimulationModule {
         this.resSelect.addEventListener('change', () => {
              const [w, h] = this.resSelect.value.split('x').map(Number)
              this.cockpitRenderer.setResolution(w, h)
+        })
+
+        this.fxCheckbox.addEventListener('change', () => {
+             this.enableRelativisticFx = this.fxCheckbox.checked
         })
     }
 
@@ -145,7 +158,7 @@ export class CockpitFlightDemo implements SimulationModule {
             this.externalRenderer.drawEnvironment()
             this.externalRenderer.drawShip(this.state)
         } else {
-            this.cockpitRenderer.render(this.state, this.geometry)
+            this.cockpitRenderer.render(this.state, this.geometry, this.enableRelativisticFx)
         }
     }
 

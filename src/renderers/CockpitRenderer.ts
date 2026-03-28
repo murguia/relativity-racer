@@ -68,13 +68,42 @@ export class CockpitRenderer {
         }
     }
 
+    private applyDoppler(baseColor: [number, number, number, number], D: number): [number, number, number, number] {
+        let [r, g, b, a] = baseColor;
+
+        // Apply Doppler intensity scaling
+        r *= D;
+        g *= D;
+        b *= D;
+
+        // Apply slight hue bias instead of aggressive channel overriding
+        if (D > 1.05) {
+            // Slight blue bias for blueshift
+            b *= 1.15;
+            r *= 0.85;
+        } else if (D < 0.95) {
+            // Slight red bias for redshift
+            r *= 1.15;
+            b *= 0.85;
+        }
+
+        r = Math.max(0, Math.min(255, r));
+        g = Math.max(0, Math.min(255, g));
+        b = Math.max(0, Math.min(255, b));
+
+        return [r, g, b, a];
+    }
+
     /**
      * Synchronous rendering of the Cockpit View explicitly for interactive flight.
      * Traces backwards null geodesics per-frame, mapping final deflections to sky texture.
      */
-    public render(ship: Ship, geometry: any) {
+    public render(ship: Ship, geometry: any, enableEffects: boolean = true) {
         // Construct the rigid orthonormal tetrad exactly once per frame
         const frame = buildObserverFrame(ship, geometry)
+        
+        // Doppler is observer-local; metric evaluated at ship position only
+        const gMetric = geometry.metric(ship.x)
         
         // Large timestep for speed. We only care about visual trajectories,
         // and RK4 is highly stable even at dt=0.5 away from the horizon.
@@ -111,6 +140,26 @@ export class CockpitRenderer {
                 // Initialize strict Null State
                 const photonState = this.rayTracer.initializeNullRay(ship.x, spatialDir2D)
 
+                let D = 1.0;
+                if (enableEffects) {
+                    const u = frame.e0;
+                    // photonState.v represents null 4-momentum up to scale
+                    const p = photonState.v;
+                    
+                    // Doppler factor derived from invariant inner product: ω_obs = -g_uv u^u p^v
+                    const w_obs = -(gMetric[0][0]*u[0]*p[0] + gMetric[1][1]*u[1]*p[1] + gMetric[2][2]*u[2]*p[2]);
+                    const D_raw = w_obs;
+                    D = Math.max(0.2, Math.min(D_raw, 5.0)); // Clamp visual bounds
+                    
+                    // Stationary Sanity Check (Debug log for center pixel)
+                    if (x === Math.floor(this.resWidth / 2) && y === Math.floor(this.resHeight / 2)) {
+                        const vSq = ship.v[1]*ship.v[1] + ship.v[2]*ship.v[2];
+                        if (vSq < 0.0001 && Math.abs(D_raw - 1.0) > 0.1) {
+                            console.warn(`[Doppler Debug] Stationary observer D_raw anomaly: ${D_raw.toFixed(4)}`);
+                        }
+                    }
+                }
+
                 // Backward trace within the 2D plane
                 const result = this.rayTracer.traceBackward(
                     photonState, 
@@ -135,7 +184,8 @@ export class CockpitRenderer {
                     const Vy = Math.cos(phi_final) * e_r[1] + Math.sin(phi_final) * e_tan_y
                     const Vz = Math.cos(phi_final) * e_r[2] + Math.sin(phi_final) * e_tan_z
                     
-                    color = this.sampleSky3D(Vx, Vy, Vz)
+                    const baseColor = this.sampleSky3D(Vx, Vy, Vz)
+                    color = this.applyDoppler(baseColor, D)
                 }
 
                 this.imageData.data[pxIdx++] = color[0]
